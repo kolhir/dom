@@ -1,4 +1,5 @@
-#!/home/kolhir/dev/flaskenv/robinlt/bin/python3
+#!/home/hi/Desktop/robin/venv/bin/python3
+
 from flask import Flask
 from flask import render_template, request
 import views
@@ -50,7 +51,7 @@ def bt1_get():
 
 @app.route('/u1')
 def u1():
-    data = bt_dict["bt1_status"] 
+    data = bt_dict["bt1_status"]
     for i in data:
         data[i] = bt_dict["bt1_status_convert"][i]
     return render_template("u1.html",
@@ -76,8 +77,7 @@ def u1_but():
 @app.route("/", methods = ['POST'])
 def ajax_bron():
     return json.dumps(200)
-
+from somewhere import ip
 # app.debug = True
 if __name__ == "__main__":
-    app.run( "192.168.0.7", debug = True)
-
+    app.run(ip, debug = True)
