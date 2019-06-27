@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <link href="{{url_for('static', filename = 'style.css')}}" rel="stylesheet">
+        <script src="{{url_for('static', filename = 'script.js')}}"></script>
+  </head>
+  <body>
+      <h2>Название</h2>
+      <h3>Описание</h3>
+      <table>
+      	<tr>
+      		<td>Потоп</td>
+      		<td>{{data.flood}}</td>
+      	</tr>
+      	<tr>
+      		<td>Сигнализация</td>
+      		<td>{{data.valve}}</td>
+      	</tr>
+      	<tr>
+      		<td>Клапан</td>
+      		<td>{{data.alarm}}</td>
+      	</tr>
+      </table>
+      <a href="u1/open" class="green">Открыть</a>
+      <a href="u1/close" class="green">Закрыть</a>
+      <a href="u1/alarm_off" class="green">Отключить сигнализацию</a>
+      <a href="u1/reset" class="green">Сброс</a>
+  </body>
+</html>
