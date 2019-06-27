@@ -3,7 +3,7 @@ from flask import Flask
 from flask import render_template, request
 import views
 app = Flask(__name__)
-
+from copy import deepcopy
 bt_dict = {
     "bt1": {
         "alarm_off":0,
@@ -37,7 +37,12 @@ bt_dict = {
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    data = deepcopy(bt_dict["bt1_status"])
+    for i in data:
+        data[i] = bt_dict["bt1_status_convert"][i][data[i]]
+    return render_template("index.html",
+        data = data
+        )
 
 @app.route('/bt1')
 def bt1_get():
@@ -45,14 +50,13 @@ def bt1_get():
     for i in bt_dict["bt1"]:
         res = res + str(bt_dict["bt1"][i])
         bt_dict["bt1"][i] = 0
-
     return res
 
 @app.route('/u1')
 def u1():
-    data = bt_dict["bt1_status"] 
+    data = deepcopy(bt_dict["bt1_status"])
     for i in data:
-        data[i] = bt_dict["bt1_status_convert"][i]
+        data[i] = bt_dict["bt1_status_convert"][i][data[i]]
     return render_template("u1.html",
         data = data
         )
@@ -70,14 +74,24 @@ def u1_but():
         else:
             bt_dict["bt1"][i] = 0
     print(bt_dict["bt1"])
-    return key
+    return '''
+<html>
+  <head>
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h4>Сигнал <b><i>''' + key + '''</i></b> был отправлен!</h4>
+    <a href="/u1" class="green">Вернуться назад</a>
+  </body>
+</html>
+'''
 
 
 @app.route("/", methods = ['POST'])
 def ajax_bron():
     return json.dumps(200)
-
+from somewhere import ip
 # app.debug = True
 if __name__ == "__main__":
-    app.run( "192.168.0.7", debug = True)
+    app.run(ip, debug = True)
 
