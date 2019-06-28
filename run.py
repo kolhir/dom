@@ -34,8 +34,8 @@ bt_dict = {
 
 }
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ['GET'])
+@app.route('/index', methods = ['GET'])
 def index():
     data = deepcopy(bt_dict["bt1_status"])
     for i in data:
@@ -60,6 +60,14 @@ def u1():
     return render_template("u1.html",
         data = data
         )
+
+@app.route('/u2')
+def u2():
+    return render_template("u2.html")
+
+@app.route('/u3')
+def u3():
+    return render_template("u3.html")
 
 @app.route('/u1/alarm_off')
 @app.route('/u1/open')
@@ -86,10 +94,13 @@ def u1_but():
 </html>
 '''
 
+import json
 
 @app.route("/", methods = ['POST'])
 def ajax_bron():
     return json.dumps(200)
+
+
 from somewhere import ip
 # app.debug = True
 if __name__ == "__main__":
