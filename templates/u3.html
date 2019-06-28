@@ -5,6 +5,31 @@
   </head>
   <body>
       <h2>3 устройство</h2>
-
+ 	   <h3>Описание</h3>
+            <table>
+            <tr>
+              <td>Статус</td>
+              <td>{{data.status}}</td>
+            </tr>
+            <tr>
+              <td>Температура</td>
+              <td>{{data.temp}}</td>
+            </tr>
+            <tr>
+              <td>Таймер</td>
+              <td>{{data.time}}</td>
+            </tr>
+          </table>
+          <form action="/u3/post" method="post">
+          	<div>
+			<label for="lastname">Таймер</label><input  type="number" name="time" min="1" max="250">
+			<label for="lastname">Температура</label><input type="number" name="temp" min="0" max="100">
+			</div>
+          <input  type = "submit" name="on" class="green" value = "Включить">
+          <input  type = "submit" name="off" class="green" value = "Выключить">
+          <input  type = "submit" name="onsup" class="green" value = "Включить + Поддерживать">
+          <input  type = "submit" name="sup"  class="green" value = "Поддерживать">
+          </form>
+          
   </body>
 </html>

@@ -1,6 +1,6 @@
 from dom import app
 from flask import render_template, request
-from dom  import u2_views
+from dom  import u2_views, u3_views
 from copy import deepcopy
 
 bt_dict = {
@@ -61,12 +61,6 @@ def u1():
     return render_template("u1.html",
         data = data
         )
-
-
-
-@app.route('/u3')
-def u3():
-    return render_template("u3.html")
 
 @app.route('/u1/alarm_off')
 @app.route('/u1/open')
