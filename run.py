@@ -1,4 +1,5 @@
-#!/home/kolhir/dev/flaskenv/robinlt/bin/python3
+#!/home/hi/Desktop/robin/venv/bin/python3
+
 from flask import Flask
 from flask import render_template, request
 import views
@@ -24,7 +25,7 @@ bt_dict = {
         "valve":{
         0:"Закрыт",
         1:"Открыт",
-        3:"Не исправен"
+        2:"Не исправен"
         },
         "alarm":{
         0:"Выключена",
@@ -38,7 +39,7 @@ bt_dict = {
 @app.route('/index', methods = ['GET'])
 def index():
     data = deepcopy(bt_dict["bt1_status"])
-    for i in data:
+    for i in bt_dict["bt1_status"]:
         data[i] = bt_dict["bt1_status_convert"][i][data[i]]
     return render_template("index.html",
         data = data
@@ -47,6 +48,7 @@ def index():
 @app.route('/bt1')
 def bt1_get():
     res = ""
+    print(42)
     for i in bt_dict["bt1"]:
         res = res + str(bt_dict["bt1"][i])
         bt_dict["bt1"][i] = 0
@@ -96,13 +98,15 @@ def u1_but():
 
 import json
 
-@app.route("/", methods = ['POST'])
+@app.route("/bt1", methods = ['POST'])
 def ajax_bron():
-    return json.dumps(200)
-
-
+    if request.method == 'POST':
+        answer=json.loads(request.get_data())
+        global bt_dict
+        for key in answer:
+            bt_dict["bt1_status"][key]=int(answer[key])
+        return "hi"
 from somewhere import ip
 # app.debug = True
 if __name__ == "__main__":
     app.run(ip, debug = True)
-
