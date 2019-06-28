@@ -5,6 +5,28 @@
   </head>
   <body>
       <h2>2 устройство</h2>
-
-  </body> 
+      <h3>Описание</h3>
+            <table>
+            <tr>
+              <td>Утечка</td>
+              <td>{{data.leak}}</td>
+            </tr>
+            <tr>
+              <td>Клапан</td>
+              <td>{{data.valve}}</td>
+            </tr>
+            <tr>
+              <td>Сигнализация</td>
+              <td>{{data.alarm}}</td>
+            </tr>
+            <tr>
+              <td>Уровень PPM</td>
+              <td>{{data.ppm}}</td>
+            </tr>
+          </table>
+         <a href="u2/open" class="green">Открыть</a>
+          <a href="u2/close" class="green">Закрыть</a>
+          <a href="u2/alarm_off" class="green">Отключить сигнализацию</a>
+          <a href="u2/reset" class="green">Сброс</a>
+</body> 
 </html>
